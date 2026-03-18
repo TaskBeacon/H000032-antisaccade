@@ -1,0 +1,196 @@
+subinfo_fields:
+  - name: subject_id
+    type: int
+    constraints:
+      min: 101
+      max: 999
+      digits: 3
+
+subinfo_mapping:
+  subject_id: 受试者编号（3位）
+  Participant Information: 被试信息
+  registration_failed: 注册失败
+  registration_successful: 注册成功
+  invalid_input: "{field} 输入无效"
+
+window:
+  size: [1280, 720]
+  units: pix
+  screen: 0
+  bg_color: gray
+  fullscreen: true
+  fullscreen_lock_escape: true
+  monitor_width_cm: 35.5
+  monitor_distance_cm: 60
+
+task:
+  task_name: antisaccade_preview
+  delta: 1
+  save_path: ./outputs/human
+  total_blocks: 3
+  total_trials: 144
+  trial_per_block: 48
+  conditions:
+    - prosaccade
+    - antisaccade
+  key_list:
+    - f
+    - j
+    - space
+  left_key: f
+  right_key: j
+  seed_mode: same_across_sub
+  overall_seed: 2025
+  language: Chinese
+  voice_name: zh-CN-YunyangNeural
+  voice_enabled: false
+  input_mode: keyboard
+  hide_cursor: true
+  force_quit_enabled: true
+  force_quit_shortcut: ctrl+q
+
+timing:
+  fixation_duration: [0.8, 1.2]
+  cue_duration: [0.4, 0.6]
+  gap_duration: [0.15, 0.25]
+  response_deadline: 1.0
+  iti_duration: 0.6
+
+stimuli:
+  instruction_text:
+    type: text
+    text: |
+      反眼跳任务
+
+      屏幕左右会出现白色圆点。
+      绿色规则：朝圆点方向反应。
+      红色规则：朝圆点相反方向反应。
+      按 F 表示左，按 J 表示右。
+
+      按空格键开始。
+    font: SimHei
+    color: white
+    height: 28
+    wrapWidth: 980
+    pos: [0, 90]
+
+  fixation:
+    type: text
+    text: "+"
+    font: SimHei
+    color: white
+    height: 44
+    pos: [0, 0]
+
+  rule_pro:
+    type: text
+    text: "朝圆点"
+    font: SimHei
+    color: "#40e640"
+    height: 32
+    pos: [0, 210]
+
+  rule_anti:
+    type: text
+    text: "背离圆点"
+    font: SimHei
+    color: "#f24040"
+    height: 32
+    pos: [0, 210]
+
+  left_anchor:
+    type: circle
+    radius: 34
+    pos: [-340, 0]
+    lineColor: "#a6a6a6"
+    fillColor: null
+
+  right_anchor:
+    type: circle
+    radius: 34
+    pos: [340, 0]
+    lineColor: "#a6a6a6"
+    fillColor: null
+
+  left_target:
+    type: circle
+    radius: 26
+    pos: [-340, 0]
+    lineColor: white
+    fillColor: white
+
+  right_target:
+    type: circle
+    radius: 26
+    pos: [340, 0]
+    lineColor: white
+    fillColor: white
+
+  block_break:
+    type: text
+    text: |
+      第 {block_num}/{total_blocks} 组完成
+
+      正确率：{block_accuracy}
+      正确反应平均RT：{mean_rt_ms} ms
+      超时次数：{timeout_count}
+
+      准备好后按空格键继续。
+    font: SimHei
+    color: white
+    height: 26
+    wrapWidth: 980
+
+  good_bye:
+    type: text
+    text: |
+      任务结束。
+
+      总试次：{total_trials}
+      正确率：{total_accuracy}
+      正确反应平均RT：{mean_rt_ms} ms
+      超时次数：{total_timeouts}
+
+      按空格键退出。
+    font: SimHei
+    color: white
+    height: 28
+    wrapWidth: 980
+
+triggers:
+  map:
+    exp_onset: 1
+    exp_end: 2
+    block_onset: 10
+    block_end: 11
+    fixation_onset: 20
+    rule_pro_onset: 21
+    rule_anti_onset: 22
+    gap_onset: 30
+    target_onset_left: 40
+    target_onset_right: 41
+    response_left: 50
+    response_right: 51
+    response_timeout: 60
+    iti_onset: 70
+
+  driver:
+    type: serial_url
+    url: loop://
+    baudrate: 115200
+
+  timing:
+    post_delay_ms: 1
+
+  policy:
+    strict: false
+
+controller:
+  fixation_duration: [0.8, 1.2]
+  cue_duration: [0.4, 0.6]
+  gap_duration: [0.15, 0.25]
+  response_deadline: 1.0
+  iti_duration: 0.6
+  random_seed: null
+  enable_logging: true
+

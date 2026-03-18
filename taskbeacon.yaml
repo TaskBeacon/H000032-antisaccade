@@ -1,0 +1,16 @@
+id: H000032
+slug: antisaccade
+title: Antisaccade Task
+acquisition: behavior
+variant: html
+cognitive_domain:
+  - inhibitory_control
+  - oculomotor_control
+  - cognitive_control
+maturity: prototype
+version:
+  release_tag: "0.1.0"
+contracts:
+  psyflow_web_taps: v0.1.0
+maintainer: []
+
