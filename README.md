@@ -1,7 +1,7 @@
 # H000032 Antisaccade Task
 
 HTML/browser preview of the canonical `T000032-antisaccade` task built with `psyflow-web`.
-The web build keeps the same condition semantics, stage order, and reduced-data meaning, but removes the task-local controller in favor of deterministic helper-based sampling.
+The web build keeps the same condition semantics, stage order, timing model, and reduced-data meaning, while mirroring the controller-free Python structure with deterministic helper logic.
 
 ## Layout
 
@@ -25,4 +25,3 @@ Open:
 ```text
 http://127.0.0.1:4173/?task=H000032-antisaccade
 ```
-
