@@ -8,7 +8,7 @@ subinfo_fields:
 
 subinfo_mapping:
   subject_id: 受试者编号（3位）
-  Participant Information: 被试信息
+  Participant Information: 参与者信息
   registration_failed: 注册失败
   registration_successful: 注册成功
   invalid_input: "{field} 输入无效"
@@ -24,7 +24,7 @@ window:
   monitor_distance_cm: 60
 
 task:
-  task_name: antisaccade_preview
+  task_name: antisaccade
   delta: 1
   save_path: ./outputs/human
   total_blocks: 3
@@ -48,6 +48,7 @@ task:
   hide_cursor: true
   force_quit_enabled: true
   force_quit_shortcut: ctrl+q
+  enable_logging: true
 
 timing:
   fixation_duration: [0.8, 1.2]
@@ -61,12 +62,10 @@ stimuli:
     type: text
     text: |
       反眼跳任务
-
-      屏幕左右会出现白色圆点。
+      屏幕左侧或右侧会出现白色圆点。
       绿色规则：朝圆点方向反应。
-      红色规则：朝圆点相反方向反应。
+      红色规则：背离圆点方向反应。
       按 F 表示左，按 J 表示右。
-
       按空格键开始。
     font: SimHei
     color: white
@@ -86,7 +85,7 @@ stimuli:
     type: text
     text: "朝圆点"
     font: SimHei
-    color: "#40e640"
+    color: [0.25, 0.9, 0.25]
     height: 32
     pos: [0, 210]
 
@@ -94,7 +93,7 @@ stimuli:
     type: text
     text: "背离圆点"
     font: SimHei
-    color: "#f24040"
+    color: [0.95, 0.25, 0.25]
     height: 32
     pos: [0, 210]
 
@@ -102,14 +101,16 @@ stimuli:
     type: circle
     radius: 34
     pos: [-340, 0]
-    lineColor: "#a6a6a6"
+    lineColor: [0.65, 0.65, 0.65]
+    lineWidth: 2
     fillColor: null
 
   right_anchor:
     type: circle
     radius: 34
     pos: [340, 0]
-    lineColor: "#a6a6a6"
+    lineColor: [0.65, 0.65, 0.65]
+    lineWidth: 2
     fillColor: null
 
   left_target:
@@ -117,6 +118,7 @@ stimuli:
     radius: 26
     pos: [-340, 0]
     lineColor: white
+    lineWidth: 2
     fillColor: white
 
   right_target:
@@ -124,15 +126,15 @@ stimuli:
     radius: 26
     pos: [340, 0]
     lineColor: white
+    lineWidth: 2
     fillColor: white
 
   block_break:
     type: text
     text: |
       第 {block_num}/{total_blocks} 组完成
-
-      正确率：{block_accuracy}
-      正确反应平均RT：{mean_rt_ms} ms
+      正确率：{block_accuracy:.1%}
+      正确反应平均 RT：{mean_rt_ms:.0f} ms
       超时次数：{timeout_count}
 
       准备好后按空格键继续。
@@ -144,11 +146,10 @@ stimuli:
   good_bye:
     type: text
     text: |
-      任务结束。
-
+      任务结束
       总试次：{total_trials}
-      正确率：{total_accuracy}
-      正确反应平均RT：{mean_rt_ms} ms
+      正确率：{total_accuracy:.1%}
+      正确反应平均 RT：{mean_rt_ms:.0f} ms
       超时次数：{total_timeouts}
 
       按空格键退出。
@@ -173,24 +174,11 @@ triggers:
     response_right: 51
     response_timeout: 60
     iti_onset: 70
-
   driver:
     type: serial_url
     url: loop://
     baudrate: 115200
-
   timing:
     post_delay_ms: 1
-
   policy:
     strict: false
-
-controller:
-  fixation_duration: [0.8, 1.2]
-  cue_duration: [0.4, 0.6]
-  gap_duration: [0.15, 0.25]
-  response_deadline: 1.0
-  iti_duration: 0.6
-  random_seed: null
-  enable_logging: true
-

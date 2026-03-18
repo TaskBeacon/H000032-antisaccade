@@ -1,15 +1,15 @@
 # H000032 Antisaccade Task
 
-HTML/browser preview of Antisaccade Task built with `psyflow-web`.
-Rule cue, gap, target-side sampling, response-key mapping, and accuracy/RT summary logic are aligned to local `T000032-antisaccade`.
+HTML/browser preview of the canonical `T000032-antisaccade` task built with `psyflow-web`.
+The web build keeps the same condition semantics, stage order, and reduced-data meaning, but removes the task-local controller in favor of deterministic helper-based sampling.
 
 ## Layout
 
-- `main.ts`: task orchestration
-- `config/config.yaml`: declarative config
-- `src/controller.ts`: rule and target sampler with performance counters
-- `src/run_trial.ts`: trial logic
-- `src/utils.ts`: block/overall summary helpers
+- `main.ts`: mode-aware orchestration, block scheduling, and app mounting
+- `config/config.yaml`: declarative task parameters and participant-facing text
+- `src/run_trial.ts`: browser-native trial builder for fixation/cue/gap/response/ITI
+- `src/utils.ts`: deterministic trial-spec helper plus summary helpers
+- `.github/workflows/notify-psyflow-web.yml`: refreshes the shared runner on pushes to `main`
 
 ## Run
 
